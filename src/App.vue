@@ -16,12 +16,14 @@ export default {
         content:[
           {
             type:'text',
-            text:"aaaaaaaaaaaaaaaaaaaaaaaa"
+            text:"aaaaaaaaaaaaaaaaaaaaaaaa",
+            id:1,
           },
           {
             type:'checkbox',
             checked:false,
-            text:" xxxxxx   xxxxxxxxxxxx "
+            text:" xxxxxx   xxxxxxxxxxxx ",
+            id:12,
           },
           
           
@@ -31,12 +33,14 @@ export default {
         content:[
           {
             type:'text',
-            text:"aaaaaaaaaaaaaaaaaaaaaaaa"
+            text:"aaaaaaaaaaaaaaaaaaaaaaaa",
+            id:1,
           },
           {
             type:'checkbox',
             checked:false,
-            text:" xxxxxx   xxxxxxxxxxxx "
+            text:" xxxxxx   xxxxxxxxxxxx ",
+            id:2,
           },
           
           
@@ -45,12 +49,14 @@ export default {
         content:[
           {
             type:'text',
-            text:"qqqqqqqqqq"
+            text:"qqqqqqqqqq",
+            id:1,
           },
           {
             type:'checkbox',
             checked:false,
-            text:" qqqqq   xxxxxxxxxxxx "
+            text:" qqqqq   xxxxxxxxxxxx ",
+            id:2,
           },
           
           
