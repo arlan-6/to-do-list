@@ -1,8 +1,10 @@
 <script>
+import axios from 'axios';
 export default {
     data() {
         return {
-            
+            template:{title:"Title",description:'Description',content:[{type:'text',text:""},]},
+            addedNote:{}
             }
             },
     props:{
@@ -13,31 +15,64 @@ export default {
         setActive(note){
             this.$emit('setActive',note)
         },
-        addNote(){
-            this.$emit('addNote',{id:Date.now() ,title:"",description:'',content:[{type:'',text:""},]} )
+        async addNote(){
+            await this.AddData()
+            // this.$emit('addNote',this.addedNote)
         },
         deleteNote(id){
             this.$emit('deleteNote',id)
+            axios.delete(`https://back-todo-list-lovat.vercel.app/note/${id}`)
+        .then(response => {
+          console.log('Data deleted successfully:', response.data);
+        })
+        .catch(error => {
+          console.error('Error deleting data:', error);
+        });
+        },
+        async AddData() {
+
+            await axios.post(`https://back-todo-list-lovat.vercel.app/note`, this.template)
+              .then(r=>r.data)
+              .then(response => {
+                console.log('Data updated successfully:', response);
+                // this.addNote = response;
+                this.$emit('addNote',response)
+              })
+              .catch(error => {
+                console.error('Error updating data:', error);
+              });
         }
     } 
 };
 </script>
 
 <template>
-<h2>Notes 📝</h2><button @click="addNote">Add</button>
+    <div class="m">
+        <h2>Notes 📝</h2><button class="addbtn" @click="addNote">Add</button>
+    </div>
 <!-- {{ notesList }} -->
-<div v-for="note in notesList" :key="note.id" class="note" >
-    <p @click="setActive(note)">
+<div class="main">
+<div v-for="note in notesList" :key="note._id" class="note" @click="setActive(note)">
+    <p >
         <strong>{{ note.title }} </strong> <br>
         {{ note.description }}
     </p>
-    <button class="trash" @click="deleteNote(note.id)">🗑️</button>
+    <button class="trash" @click="deleteNote(note._id)">🗑️</button></div>
 
 
 </div>
 </template>
 
 <style scoped>
+
+
+.main{
+    overflow-y:auto;
+    height: 70%;
+}
+.main::-webkit-scrollbar-thumb{
+    background-color: rgb(203, 122, 16);
+}
 .note{
     border:1px solid #ccc;
     border-radius: 10px;
@@ -49,21 +84,21 @@ export default {
     justify-content: space-between;
 }
 .note:hover{
-    background-color: #2c2a27;
+    background-color: #2c2a2722;
     border:1px solid #e0e0e0;
 }
 button{
     border: none;
     outline: none;
-    background-color: #2c2a27;
-    color: #F0E3CA;
+    background-color: #2c2a271d;
+    color: #303036;
     padding: 9px;
     border-radius: 5px;
 }
 button:hover{
     
-    background-color: #393734;
-    color: #F0E3CA;
+    background-color: #3937342f;
+    color: #303036;
 }
 .trash{
     
