@@ -81,6 +81,7 @@ export default {
         type="text" 
         :style="{ textDecoration: content.checked ? 'line-through' : 'none',
         fontSize: content.type === 'text' ? '1.1em' : '1em' ,
+        backgroundColor: content.type === 'checkbox' && content.unChecker === true ? '#d79b3227' :auto
         }" 
             v-model="content.text" /> 
         </div>
