@@ -97,7 +97,7 @@ export default {
       <SideBar :notesList="notes" @deleteNote="deleteNote" @setActive="setactive" @addNote="addNote" />
     </div>
     <div class="containerViewbar" >
-      <ViewBar @change="change"  :active="active"/>
+      <ViewBar @change="change"  v-model:active="active"/>
     </div>
   </div>
   
