@@ -58,7 +58,7 @@ export default {
 <div class="main">
 <div v-for="note in notesList" :key="note._id" class="note" @click="setActive(note)">
     <p >
-        <strong>{{ note.title }} </strong> <br>
+        <strong :style="{textOverflow: 'ellipsis'}">{{ note.title }} </strong> <br>
         {{ note.description }}
     </p>
     <button class="trash" @click="deleteNote(note._id)">🗑️</button></div>

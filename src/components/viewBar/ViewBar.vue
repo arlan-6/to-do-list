@@ -1,5 +1,6 @@
 <script>
 import axios from 'axios';
+defineProps({active:Object})
 export default {
     data(){
         return{
