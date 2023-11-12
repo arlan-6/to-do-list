@@ -46,6 +46,8 @@ export default {
       console.log('delete')
       this.notes = this.notes.filter(item => item._id !== id);
       if(this.active._id===id){
+        console.log(id)
+        console.log(this.active._id)
         this.active={_id:0}
       }
     },
