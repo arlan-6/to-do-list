@@ -67,7 +67,9 @@ export default {
     <input placeholder="description" @blur="changeValue" class="text" type="text" v-model="active.description" />
     <div class="main">
         <div v-for="content in active.content" class="box" :style="{
-        marginTop:content.type === 'text'? '26px':'6px'}">
+        marginTop:content.type === 'text'? '26px':'6px',
+        
+        backgroundColor: content.type === 'checkbox' && content.unChecker === true ? '#d79b3227' :auto}">
         <input @click="changType(content.id)" value="🔁" title="Change to checkbox or text" class="tr" type="button" name="" id="">
 
         <!-- {{ content }} -->
@@ -81,12 +83,11 @@ export default {
         type="text" 
         :style="{ textDecoration: content.checked ? 'line-through' : 'none',
         fontSize: content.type === 'text' ? '1.1em' : '1em' ,
-        backgroundColor: content.type === 'checkbox' && content.unChecker === true ? '#d79b3227' :auto
         }" 
             v-model="content.text" /> 
         </div>
         <div class="tr" title="Auto unCheck">⏰</div>
-        <input @click="updateData" v-model="content.unChecker"  value="" title="Auto unCheck" class="tr" type="checkbox" name="" id="">
+        <input @click="updateData" v-model="content.unChecker" v-show="content.type === 'checkbox'"  value="" title="Auto unCheck" class="tr" type="checkbox" name="" id="">
 
         <button class="trr" @click="deleteContent(content.id)">🗑️</button>
         </div>
