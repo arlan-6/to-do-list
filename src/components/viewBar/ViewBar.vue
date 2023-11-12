@@ -86,7 +86,7 @@ export default {
         }" 
             v-model="content.text" /> 
         </div>
-        <div class="tr" title="Auto unCheck">⏰</div>
+        <div class="tr" v-show="content.type === 'checkbox'" title="Auto unCheck">⏰</div>
         <input @click="updateData" v-model="content.unChecker" v-show="content.type === 'checkbox'"  value="" title="Auto unCheck" class="tr" type="checkbox" name="" id="">
 
         <button class="trr" @click="deleteContent(content.id)">🗑️</button>
