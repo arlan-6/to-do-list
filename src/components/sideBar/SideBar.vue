@@ -3,8 +3,10 @@ import axios from 'axios';
 export default {
     data() {
         return {
-            template:{title:"Title",description:'Description',content:[{type:'text',text:""},]},
-            addedNote:{}
+            template:{title:"Title",description:'Description',content:[{type:'text',text:"",unChecker:false},]},
+            addedNote:{},
+            urlTest:'http://localhost:1010/note',
+            urlMain:'https://back-todo-list-lovat.vercel.app/note'
             }
             },
     props:{
@@ -21,7 +23,7 @@ export default {
         },
         deleteNote(id){
             this.$emit('deleteNote',id)
-            axios.delete(`https://back-todo-list-lovat.vercel.app/note/${id}`)
+            axios.delete(`${this.urlTest}/${id}`)
         .then(response => {
           console.log('Data deleted successfully:', response.data);
         })
@@ -31,7 +33,7 @@ export default {
         },
         async AddData() {
 
-            await axios.post(`https://back-todo-list-lovat.vercel.app/note`, this.template)
+            await axios.post(`${this.urlTest}`, this.template)
               .then(r=>r.data)
               .then(response => {
                 console.log('Data updated successfully:', response);
@@ -48,7 +50,9 @@ export default {
 
 <template>
     <div class="m">
-        <h2>Notes 📝</h2><button class="addbtn" @click="addNote">Add</button>
+        <h2>Notes 📝</h2>
+        <button class="addbtn" @click="addNote">Add</button>
+        <button>Ai</button>
     </div>
 <!-- {{ notesList }} -->
 <div class="main">
@@ -103,5 +107,8 @@ button:hover{
 .trash{
     
     border-radius: 10px;
+}
+.addbtn{
+    margin-right: 10px;
 }
 </style>

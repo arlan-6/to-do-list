@@ -4,6 +4,8 @@ export default {
     data(){
         return{
             showAddContent:false,
+            urlTest:'http://localhost:1010/note',
+            urlMain:'https://back-todo-list-lovat.vercel.app/note'
         }
     },
     props:{
@@ -24,6 +26,7 @@ export default {
             type:'checkbox',
             checked:false,
             text:"",
+            unChecker:false,
             id:Date.now(),
           }]
             this.updateData()
@@ -42,7 +45,7 @@ export default {
     },
     updateData() {
 
-      axios.patch(`https://back-todo-list-lovat.vercel.app/note/${this.active._id}`, this.active)
+      axios.patch(`${this.urlTest}/${this.active._id}`, this.active)
         .then(response => {
           console.log('Data updated successfully:', response.data);
         })
@@ -65,9 +68,11 @@ export default {
     <div class="main">
         <div v-for="content in active.content" class="box" :style="{
         marginTop:content.type === 'text'? '26px':'6px'}">
+        <input @click="changType(content.id)" value="🔁" title="Change to checkbox or text" class="tr" type="button" name="" id="">
+
         <!-- {{ content }} -->
         <div class="content">
-           <p v-if="content.type === 'text'" style="font-size: larger;">•</p>
+           <p v-if="content.type === 'text'" style="font-size: larger;"></p>
            <input @click="updateData" class="checkbox" v-model="content.checked" type="checkbox" name="done" v-else-if="content.type === 'checkbox'" id="">
            <input 
         placeholder="text" 
@@ -79,9 +84,10 @@ export default {
         }" 
             v-model="content.text" /> 
         </div>
+        <div class="tr" title="Auto unCheck">⏰</div>
+        <input @click="updateData" v-model="content.unChecker"  value="" title="Auto unCheck" class="tr" type="checkbox" name="" id="">
 
-        <input @click="changType(content.id)" value="🔁" title="Change to checkbox or text" class="tr" type="button" name="" id="">
-        <button class="tr" @click="deleteContent(content.id)">🗑️</button>
+        <button class="trr" @click="deleteContent(content.id)">🗑️</button>
         </div>
     </div>
     <button @click="addContent" >➕</button>
@@ -157,6 +163,16 @@ button:hover{
     margin-top: 0px;
     border-radius: 3px;
     background-color: #d5ccbe10;
+    border: none;outline: none;
+}
+.trr{
+    cursor: pointer;
+    font-size: .7em;
+    padding: 0px;
+    margin-top: 0px;
+    margin-left: 20px;
+    border-radius: 3px;
+    background-color: #3e3e3e32;
     border: none;outline: none;
 }
 .tr:hover ~ .box {

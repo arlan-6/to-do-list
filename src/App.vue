@@ -18,8 +18,10 @@ export default {
       active:{_id:0},
       showViewBar:false,
       showSideBar:true,
-      isMobile: false
-      
+      isMobile: false,
+      url:'http://localhost:1010/note',
+      url1:'https://back-todo-list-lovat.vercel.app/note',
+
     }
     
   },
@@ -48,7 +50,7 @@ export default {
       }
     },
     fetchData() {
-      axios.get('https://back-todo-list-lovat.vercel.app/note')
+      axios.get(this.url)//00000000000000000000000000000000
         .then(response => {
           this.notes = response.data;
         })
