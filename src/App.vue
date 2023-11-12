@@ -50,7 +50,7 @@ export default {
       }
     },
     fetchData() {
-      axios.get(this.url)//00000000000000000000000000000000
+      axios.get(this.url1)//00000000000000000000000000000000
         .then(response => {
           this.notes = response.data;
         })

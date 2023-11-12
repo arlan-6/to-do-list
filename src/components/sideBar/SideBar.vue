@@ -23,7 +23,7 @@ export default {
         },
         deleteNote(id){
             this.$emit('deleteNote',id)
-            axios.delete(`${this.urlTest}/${id}`)
+            axios.delete(`${this.urlMain}/${id}`)
         .then(response => {
           console.log('Data deleted successfully:', response.data);
         })
@@ -33,7 +33,7 @@ export default {
         },
         async AddData() {
 
-            await axios.post(`${this.urlTest}`, this.template)
+            await axios.post(`${this.urlMain}`, this.template)
               .then(r=>r.data)
               .then(response => {
                 console.log('Data updated successfully:', response);

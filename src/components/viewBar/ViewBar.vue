@@ -45,7 +45,7 @@ export default {
     },
     updateData() {
 
-      axios.patch(`${this.urlTest}/${this.active._id}`, this.active)
+      axios.patch(`${this.urlMain}/${this.active._id}`, this.active)
         .then(response => {
           console.log('Data updated successfully:', response.data);
         })
