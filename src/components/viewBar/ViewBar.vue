@@ -61,7 +61,7 @@ export default {
 
 <template>
 <h2>View 🪟</h2>
-<!-- {{ active }} -->
+{{ active }}
 <div class="" v-if="active._id != 0">
     <input placeholder="title" @blur="changeValue" class="texta text" type="text" v-model="active.title" />
     <input placeholder="description" @blur="changeValue" class="text" type="text" v-model="active.description" />
