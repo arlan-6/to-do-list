@@ -49,6 +49,7 @@ export default {
         console.log(id)
         this.active={_id:0}
         console.log(this.active)
+        this.toggleViewBar()
       }
     },
     fetchData() {
@@ -97,7 +98,7 @@ export default {
       <SideBar :notesList="notes" @deleteNote="deleteNote" @setActive="setactive" @addNote="addNote" />
     </div>
     <div class="containerViewbar" >
-      <ViewBar @change="change"  v-model:active="active"/>
+      <ViewBar @change="change"  :active="active"/>
     </div>
   </div>
   
