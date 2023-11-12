@@ -1,12 +1,13 @@
 <script>
 import axios from 'axios';
-defineProps({active:Object})
+
 export default {
     data(){
         return{
             showAddContent:false,
             urlTest:'http://localhost:1010/note',
-            urlMain:'https://back-todo-list-lovat.vercel.app/note'
+            urlMain:'https://back-todo-list-lovat.vercel.app/note',
+            activeData:this.active
         }
     },
     props:{
@@ -14,16 +15,16 @@ export default {
     } ,
     methods:{
         changeValue(){
-            this.$emit('change',this.active)
-            console.log(this.active.title)
+            this.$emit('change',this.activeData)
+            console.log(this.activeData.title)
             this.updateData()
         },
         deleteContent(id){
-            this.active.content = this.active.content.filter(item => item.id !== id)
+            this.activeData.content = this.activeData.content.filter(item => item.id !== id)
             this.updateData()
         },
         addContent(){
-            this.active.content = [...this.active.content,{
+            this.activeData.content = [...this.activeData.content,{
             type:'checkbox',
             checked:false,
             text:"",
@@ -33,7 +34,7 @@ export default {
             this.updateData()
         },
         changType(contentId){
-            const content = this.active.content.find(item => item.id === contentId);
+            const content = this.activeData.content.find(item => item.id === contentId);
 
             if (content) {
                 // Toggle content type
@@ -46,7 +47,7 @@ export default {
     },
     updateData() {
 
-      axios.patch(`${this.urlMain}/${this.active._id}`, this.active)
+      axios.patch(`${this.urlMain}/${this.activeData._id}`, this.activeData)
         .then(response => {
           console.log('Data updated successfully:', response.data);
         })
@@ -62,12 +63,12 @@ export default {
 
 <template>
 <h2>View 🪟</h2>
-{{ active }}
-<div class="" v-if="active._id != 0">
-    <input placeholder="title" @blur="changeValue" class="texta text" type="text" v-model="active.title" />
-    <input placeholder="description" @blur="changeValue" class="text" type="text" v-model="active.description" />
+{{ activeData }}
+<div class="" v-if="activeData._id != 0">
+    <input placeholder="title" @blur="changeValue" class="texta text" type="text" v-model="activeData.title" />
+    <input placeholder="description" @blur="changeValue" class="text" type="text" v-model="activeData.description" />
     <div class="main">
-        <div v-for="content in active.content" class="box" :style="{
+        <div v-for="content in activeData.content" class="box" :style="{
         marginTop:content.type === 'text'? '26px':'6px',
         
         backgroundColor: content.type === 'checkbox' && content.unChecker === true ? '#d79b3227' :auto}">
