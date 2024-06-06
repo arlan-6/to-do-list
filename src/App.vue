@@ -1,5 +1,6 @@
 <script>
 import SideBar from './components/sideBar/SideBar.vue';
+import MainComponent from './components/viewBar/MainComponent.vue';
 import ViewBar from './components/viewBar/ViewBar.vue';
 
 import axios from 'axios';
@@ -11,6 +12,7 @@ export default {
   components: {
     SideBar,
     ViewBar,
+    MainComponent
   },
   data() {
     return {
@@ -27,33 +29,37 @@ export default {
   },
   methods: {
     setactive(note) {
-      console.log("setActive")
+      // console.log("setActive")
       this.active = note;
     },
     change(change) {
       this.notes = this.notes.filter((note) => {
+        // console.log(note)
         return note._id != change._id
       })
+      // console.log('aaaaaaa')
+      // console.log(change)
+      debugger
       this.notes = [change, ...this.notes,].sort((a, b) => b._id - a._id);
 
     },
     addNote(note) {
-      console.log("addNote")
+      // console.log("addNote")
       this.notes = [note, ...this.notes,]
       this.active = note;
     },
     deleteNote(id) {
-      console.log('delete')
+      // console.log('delete')
       this.notes = this.notes.filter(item => item._id !== id);
       if (this.active._id === id) {
         console.log(id)
         this.active = { _id: 0 }
-        console.log(this.active)
+        // console.log(this.active)
         this.toggleViewBar()
       }
     },
     fetchData() {
-      axios.get(this.url1)//00000000000000000000000000000000
+      axios.get(this.url)//
         .then(response => {
           this.notes = response.data;
         })
@@ -91,7 +97,7 @@ export default {
         <SideBar :notesList="notes" @deleteNote="deleteNote" @setActive="setactive" @addNote="addNote" />
       </div>
       <div class="containerViewbar" v-else>
-        <ViewBar @change="change" :active="active" />
+        <MainComponent @change="change" :active="active" />
       </div>
     </div>
     <div class="container" v-else>
@@ -99,7 +105,8 @@ export default {
         <SideBar :notesList="notes" @deleteNote="deleteNote" @setActive="setactive" @addNote="addNote" />
       </div>
       <div class="containerViewbar">
-        <ViewBar @change="change" :active="active" />
+        <!-- <ViewBar @change="change" :active="active" /> -->
+        <MainComponent @change="change" :active="active" />
       </div>
     </div>
 
@@ -142,6 +149,7 @@ h1 {
   border-radius: 20px;
   flex: 1;
   padding: 20px;
+  max-width: 329px;
   background-color: #F0F7F4;
 }
 
